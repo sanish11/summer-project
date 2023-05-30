@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:outlineAmbientShadowColor="#000000"
     android:outlineProvider="bounds"
-    tools:context=".Activity2">
+    tools:context=".Activity2"
+    android:background="@drawable/bg">
 
     <ScrollView
         android:layout_width="match_parent"

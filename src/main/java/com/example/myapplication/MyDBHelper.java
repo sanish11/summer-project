@@ -125,23 +125,6 @@ public long saveCustomer(String c_name, String c_phone, String c_Address, String
     public Cursor getAllRecords(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor=db.rawQuery("select * from book",null);
-
-
-//        String op="";
-//
-//        while(cursor.moveToNext()){
-//
-//            String name=cursor.getString(1);
-//            String nationality=cursor.getString(2);
-//            String address=cursor.getString(3);
-//            String phone=cursor.getString(4);
-//            String Bike=cursor.getString(5);
-//            String visit_date=cursor.getString(6);
-//            String return_date=cursor.getString(7);
-//            String price_per_day=cursor.getString(8);
-//            String total_price=cursor.getString(9);
-//            op=op+  name +"-"+nationality+"-"+address+"-"+phone+"-"+Bike+"-"+visit_date+"-"+return_date+"-"+price_per_day+"-"+total_price+"\n";
-//        }
         return cursor;
 
     }
@@ -149,22 +132,6 @@ public long saveCustomer(String c_name, String c_phone, String c_Address, String
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cu=db.rawQuery("select * from customer",null);
 
-
-//        String op="";
-//
-//        while(cursor.moveToNext()){
-//
-//            String name=cursor.getString(1);
-//            String nationality=cursor.getString(2);
-//            String address=cursor.getString(3);
-//            String phone=cursor.getString(4);
-//            String Bike=cursor.getString(5);
-//            String visit_date=cursor.getString(6);
-//            String return_date=cursor.getString(7);
-//            String price_per_day=cursor.getString(8);
-//            String total_price=cursor.getString(9);
-//            op=op+  name +"-"+nationality+"-"+address+"-"+phone+"-"+Bike+"-"+visit_date+"-"+return_date+"-"+price_per_day+"-"+total_price+"\n";
-//        }
         return cu;
 
     }
@@ -173,6 +140,24 @@ public long saveCustomer(String c_name, String c_phone, String c_Address, String
         int result=db.delete("book","name=?",new String[]{String.valueOf(name)});
         db.close();
         return result>0;
+    }
+    public boolean deleteCustomer(String name){
+        SQLiteDatabase db= this.getWritableDatabase();
+        int result=db.delete("customer","name=?",new String[]{String.valueOf(name)});
+        db.close();
+        return result>0;
+    }
+    public Cursor showResult(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM book WHERE name = ?", new String[]{name});
+
+        return cursor;
+    }
+    public Cursor showResult_customer(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM customer WHERE name = ?", new String[]{name});
+
+        return cursor;
     }
 
 }

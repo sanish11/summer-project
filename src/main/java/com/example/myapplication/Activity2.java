@@ -166,7 +166,7 @@ public class Activity2 extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
 
-                long recordcustomer = db.saveCustomer(personName,Nationality,License_no,Passport_no,Address,Phone_num,date1,date2,Bike,Bike_num,tprice);
+                long recordcustomer = db.saveCustomer(personName,Phone_num,Address,Nationality,Bike,Bike_num,date1,date2,License_no,Passport_no,tprice);
 
                 if (recordcustomer > 0)
                     Toast.makeText(getApplicationContext(), "Saved successfully", Toast.LENGTH_LONG).show();

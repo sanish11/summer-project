@@ -33,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
         button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivitybook();
+                openActivityBook();
             }
         });
         button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openActivitybook3();
+                openActivityDetails();
             }
         });
 
@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent =new Intent(this,Activity2.class);
         startActivity(intent);
     }
-    public void openActivitybook(){
+    public void openActivityBook(){
         Intent intent =new Intent(this,Book.class);
         startActivity(intent);
 
     }
-    public void openActivitybook3(){
+    public void openActivityDetails(){
         Intent intent =new Intent(this,Details.class);
         startActivity(intent);
 

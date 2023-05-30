@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/del_btn"
+        android:id="@+id/del_btn_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="276dp"
@@ -23,7 +23,7 @@
         />
 
     <EditText
-        android:id="@+id/delete_name"
+        android:id="@+id/delete_name_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="248dp"
@@ -31,22 +31,22 @@
         android:inputType="textPersonName"
         android:text="Enter Name of Record"
         android:onClick="clearHintText"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/show"
+        android:id="@+id/show_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="276dp"
+        android:layout_marginStart="60dp"
 
+        android:layout_marginBottom="276dp"
         android:background="@drawable/ripple_effect"
         android:text="Show Detail"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/del_btn"
+
         app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

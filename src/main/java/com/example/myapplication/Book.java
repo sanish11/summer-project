@@ -1,9 +1,16 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +24,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,7 +44,9 @@ public class Book extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_book);
+        createNotificationChannel();
         myCalendar=Calendar.getInstance();
 
         setTitle("Booking Section");
@@ -93,6 +103,7 @@ public class Book extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(TextUtils.isEmpty(name.getText().toString())){
                     name.setError("Name is compulsary");
                 }
@@ -128,6 +139,7 @@ public class Book extends AppCompatActivity {
                 String Phone_num = phone_num.getText().toString();
                 String Bike = bike.getText().toString();
                 String v_date = visit_date.getText().toString();
+
                 String r_date = return_date.getText().toString();
                 String ppday = price_per_day.getText().toString();
                 String tprice = total_price.getText().toString();
@@ -160,10 +172,29 @@ public class Book extends AppCompatActivity {
 //                assert returnDate != null;
                 long recordid = db.saveBooking(personName, Nationality, Address, Phone_num, Bike, date1,date2, ppday, tprice);
 
-                if (recordid > 0)
+                if (recordid > 0){
                     Toast.makeText(getApplicationContext(), "Saved successfully", Toast.LENGTH_LONG).show();
-                else
+                    /*Toast.makeText(getApplicationContext(), "wala wala", Toast.LENGTH_LONG).show();*/
+                } else
                     Toast.makeText(getApplicationContext(), "Unsaved", Toast.LENGTH_LONG).show();
+
+                String NotificationDateFormat = "dd-MM-yyyy";
+
+
+                long visitdatemiliseconds = date1.getTime()-86400000;
+                Log.d("vdate", String.valueOf(visitdatemiliseconds));
+
+
+                Intent intent = new Intent(Book.this,RemainderBroadcast.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(Book.this,0,intent,PendingIntent.FLAG_MUTABLE);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                long timeAtButtonClick =System.currentTimeMillis();
+                long tenSecondsInMillis = 1000;
+                alarmManager.set(AlarmManager.RTC_WAKEUP,
+                        timeAtButtonClick + tenSecondsInMillis, pendingIntent);
+                //visitdatemiliseconds : to be used for the noptification day before visit date
+
+
             }
         });
 
@@ -187,6 +218,18 @@ public class Book extends AppCompatActivity {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         return_date.setText(dateFormat1.format(calendar.getTime()));
+    }
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name="MaharjanBikes";
+            String description = "Channel for maharjanbikes";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel =  new NotificationChannel("maharjanbikes",name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 

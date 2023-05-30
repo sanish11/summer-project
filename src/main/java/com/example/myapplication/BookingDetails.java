@@ -7,9 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,22 +33,25 @@ public class BookingDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
         setTitle("Booking Details");
+
+
         MyDBHelper db = new MyDBHelper(BookingDetails.this, "BikesDB", null, 1);
 //        button= (Button)findViewById(R.id.Update);
-        name= new ArrayList<>();
-        nationlality= new ArrayList<>();
-        address= new ArrayList<>();
-        number= new ArrayList<>();
-        bike= new ArrayList<>();
-        visit_date= new ArrayList<>();
-        end_date= new ArrayList<>();
-        price_per_day= new ArrayList<>();
-        total_price= new ArrayList<>();
+        name = new ArrayList<>();
+        nationlality = new ArrayList<>();
+        address = new ArrayList<>();
+        number = new ArrayList<>();
+        bike = new ArrayList<>();
+        visit_date = new ArrayList<>();
+        end_date = new ArrayList<>();
+        price_per_day = new ArrayList<>();
+        total_price = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerview);
-        adapter = new MyAdapter(this,name,nationlality,address,number,bike,visit_date,end_date,price_per_day,total_price);
+        adapter = new MyAdapter(this, name, nationlality, address, number, bike, visit_date, end_date, price_per_day, total_price);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         displaydata();
+
 //        delete = findViewById(R.id.delete);
 //           delete.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -60,6 +67,29 @@ public class BookingDetails extends AppCompatActivity {
 //            }
 //       });
     }
+
+
+
+//public boolean onCreateOptionsMenu(Menu menu) {
+//    getMenuInflater().inflate(R.menu.menu_item,menu);
+//    MenuItem menuItem = menu.findItem(R.id.search);
+//    SearchView searchView = (SearchView) menuItem.getActionView();
+//    searchView.setMaxWidth(Integer.MAX_VALUE);
+//    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//        @Override
+//        public boolean onQueryTextSubmit(String query) {
+//            return false;
+//        }
+//
+//        @Override
+//        public boolean onQueryTextChange(String newText) {
+//            Log.d("TAG", "onQueryTextChange: " + newText);
+//            adapter.getFilter().filter(newText);
+//            return true;
+//        }
+//    });
+//    return true;
+//}
 
     private void displaydata(){
         Cursor cursor= db.getAllRecords();
@@ -84,5 +114,6 @@ public class BookingDetails extends AppCompatActivity {
         }
 
     }
+
 
 }

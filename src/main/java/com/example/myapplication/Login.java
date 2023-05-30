@@ -22,6 +22,7 @@ int pin=123321;
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+
         EditText password = findViewById(R.id.pass);
         Button passbutton= (Button)findViewById(R.id.passbutton);
         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
@@ -43,10 +44,12 @@ int pin=123321;
             }
         });
 
+
     }
     public void openMainActicity(){
         Intent intent =new Intent(this,MainActivity.class);
         startActivity(intent);
 
     }
+
 }

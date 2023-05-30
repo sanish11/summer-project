@@ -1,9 +1,11 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -23,16 +25,21 @@ public class CustomerDetails extends AppCompatActivity {
         setTitle("Customer Details");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_details);
+        Context context;
+
         name= new ArrayList<>();
-        nationlality= new ArrayList<>();
-        address= new ArrayList<>();
+
         number= new ArrayList<>();
+        address= new ArrayList<>();
+        nationlality= new ArrayList<>();
+
         bike= new ArrayList<>();
         bike_no= new ArrayList<>();
-        visit_date= new ArrayList<>();
-        end_date= new ArrayList<>();
         License_no= new ArrayList<>();
         Passport_no= new ArrayList<>();
+        visit_date= new ArrayList<>();
+        end_date= new ArrayList<>();
+
         total_price= new ArrayList<>();
         recycler = findViewById(R.id.recycler);
         adapter = new MyAdapter2(this,name,nationlality,address,number,bike,bike_no,visit_date,end_date,License_no,Passport_no,total_price);
@@ -52,9 +59,9 @@ public class CustomerDetails extends AppCompatActivity {
             while(cursor.moveToNext())
             {
                 name.add(cursor.getString(1));
-                nationlality.add(cursor.getString(2));
+                number.add(cursor.getString(2));
                 address.add(cursor.getString(3));
-                number.add(cursor.getString(4));
+                nationlality.add(cursor.getString(4));
                 bike.add(cursor.getString(5));
                 bike_no.add(cursor.getString(6));
                 visit_date.add(cursor.getString(7));
@@ -64,6 +71,7 @@ public class CustomerDetails extends AppCompatActivity {
 
                 total_price.add(cursor.getString(11));
             }
+            adapter.notifyDataSetChanged();
         }
 
     }
